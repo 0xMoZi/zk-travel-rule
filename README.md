@@ -235,15 +235,30 @@ Soroban's `Bn254G2Affine` is `BytesN<128>`: `be(X.c1) ‖ be(X.c0) ‖ be(Y.c1) 
 ## Quick start (Makefile)
 
 ```bash
+# 0. Set up environment variables
+make setup-env
+
 # 1. Generate and fund two testnet VASP accounts
 make generate-keys
-# Copy the printed ADDRESS and SECRET values into .env
+# Copy the printed ADDRESS and SECRET values into .env and frontend/.env
 
 # 2. Install Node dependencies
 make install-deps
 
 # 3. Compile ZK circuits + Soroban contract
 make build-all
+```
+
+> **⚠️ Important Note**
+>
+> When you run `make build-all` for the **first time**, the project will **generate** the **Powers of Tau 17** file (`pot17_final.ptau`).  
+> This is a trusted setup for circuits with up to 2^17 constraints.
+>
+> This process is computationally heavy and can take **15–45 minutes** (or longer on slower machines) depending on your CPU.  
+> 
+> **This is normal.** It only happens once — please be patient.
+
+```bash
 
 # 4. Deploy contract to Stellar testnet
 make deploy-contract
