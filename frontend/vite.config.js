@@ -20,7 +20,6 @@ export default defineConfig({
     },
     worker: {
         format: "es",
-        // TAMBAHKAN PLUGIN DI SINI AGAR WORKER JUGA MENERIMA POLYFILL
         plugins: () => [
             nodePolyfills({
                 include: ["buffer", "util", "events"],

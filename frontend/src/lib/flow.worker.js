@@ -1,3 +1,5 @@
+import "./buffer-polyfill.js";
+
 import { groth16 } from "snarkjs";
 import { Client } from "@stellar/stellar-sdk/contract";
 import { Address, Keypair, TransactionBuilder } from "@stellar/stellar-sdk";
