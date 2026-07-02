@@ -10,6 +10,7 @@ export default defineConfig({
             globals: {
                 Buffer: true,
             },
+            process: true,
         }),
     ],
     optimizeDeps: {
