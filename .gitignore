@@ -1,0 +1,31 @@
+# ── Rust / Cargo Artifacts ──
+/target/
+Cargo.lock
+
+# ── Node.js Dependencies & Build Outputs ──
+node_modules/
+/frontend/node_modules/
+/frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Local Environment & Secret Keys (CRITICAL) ──
+.env
+.env.local
+.env.*.local
+/frontend/.env
+/frontend/.env.local
+
+# ── Stellar / Soroban Local Settings ──
+.soroban/
+.stellar/
+
+# ── ZK Circuits Build Intermediates (R1CS & PTAU) ──
+/circuits/build/
+
+# ── OS Artifacts ──
+.DS_Store
+Thumbs.db
+
+scripts/roots.json
