@@ -12,9 +12,6 @@ export default defineConfig({
             },
         }),
     ],
-    define: {
-        "global.Buffer": "Buffer",
-    },
     optimizeDeps: {
         exclude: ["snarkjs"],
     },
