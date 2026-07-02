@@ -289,7 +289,6 @@ async function doRejectIntent(intentId) {
 self.onmessage = async ({ data }) => {
     try {
         if (data.env) ENV = data.env;
-        console.log("[debug] ENV received in worker:", ENV);
         if (data.type === "submit_intent") {
             await doSubmitIntent(
                 data.senderKey,
