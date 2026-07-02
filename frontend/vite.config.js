@@ -10,18 +10,29 @@ export default defineConfig({
             globals: {
                 Buffer: true,
             },
-            process: true,
         }),
     ],
+    // TAMBAHKAN BLOK DEFINE INI:
+    // Saat build di Vercel, jika kode mendeteksi objek "Buffer",
+    // ia akan otomatis menggunakan Uint8Array / implementasi internal browser
+    define: {
+        "global.Buffer": "Buffer",
+    },
     optimizeDeps: {
         exclude: ["snarkjs"],
     },
     worker: {
         format: "es",
+        // TAMBAHKAN PLUGIN DI SINI AGAR WORKER JUGA MENERIMA POLYFILL
+        plugins: () => [
+            nodePolyfills({
+                include: ["buffer", "util", "events"],
+                globals: { Buffer: true },
+            }),
+        ],
     },
     server: {
         headers: {
-            // Required for SharedArrayBuffer / snarkjs WASM in some browsers
             "Cross-Origin-Opener-Policy": "same-origin",
             "Cross-Origin-Embedder-Policy": "require-corp",
         },
