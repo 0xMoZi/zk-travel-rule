@@ -2,7 +2,17 @@ CIRCOM_COMPILER = circom
 SNARKJS = npx snarkjs
 DEGREE = 17
 
-.PHONY: all generate-keys setup-env install-deps build-all ptau compile-core compile-smt build-contract deploy-contract init-contract dev clean
+.PHONY: all setup-env generate-keys install-deps build-all ptau compile-core compile-smt build-contract deploy-contract init-contract dev clean
+
+setup-env:
+	@if [ ! -f .env ]; then \
+		echo "VITE_CONTRACT_ID=\nVITE_RPC_URL=https://alchemy.com\nVITE_NETWORK_PASSPHRASE=\"Test SDF Network ; September 2015\"\nVITE_VASP_A_ADDRESS=\nVITE_VASP_B_ADDRESS=\nVITE_VASP_A_SECRET=\nVITE_VASP_B_SECRET=" > .env; \
+		echo "✓ File a new .env file has been created in the root directory. Please fill in the required data. 'make generate-keys'."; \
+	fi
+	@if [ ! -f frontend/.env ]; then \
+		echo "VITE_CONTRACT_ID=\nVITE_RPC_URL=https://alchemy.com\nVITE_NETWORK_PASSPHRASE=\"Test SDF Network ; September 2015\"\nVITE_VASP_A_ADDRESS=\nVITE_VASP_B_ADDRESS=\nVITE_VASP_A_SECRET=\nVITE_VASP_B_SECRET=" > frontend/.env; \
+		echo "✓ File a new .env file has been created in the frontend directory. Please fill in the required data. 'make generate-keys'."; \
+	fi
 
 generate-keys:
 	@echo "⏳ Creating and funding the balance for vasp_a..."
@@ -18,13 +28,7 @@ generate-keys:
 	@echo "VITE_VASP_B_SECRET  =" `stellar keys secret vasp_b`
 	@echo "=========================================================================="
 
-setup-env:
-	@if [ ! -f .env ]; then \
-		echo "VITE_CONTRACT_ID=\nVITE_RPC_URL=https://alchemy.com\nVITE_NETWORK_PASSPHRASE=Test SDF Network ; September 2015\nVITE_VASP_A_ADDRESS=\nVITE_VASP_B_ADDRESS=\nVITE_VASP_A_SECRET=\nVITE_VASP_B_SECRET=" > .env; \
-		echo "✓ File a new .env file has been created in the root directory. Please fill in the required data. 'make generate-keys'."; \
-	fi
-
-install-deps: setup-env
+install-deps:
 	@echo "⏳ Installing Node.js dependencies..."
 	npm install
 	cd frontend && npm install
