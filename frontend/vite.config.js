@@ -12,9 +12,6 @@ export default defineConfig({
             },
         }),
     ],
-    // TAMBAHKAN BLOK DEFINE INI:
-    // Saat build di Vercel, jika kode mendeteksi objek "Buffer",
-    // ia akan otomatis menggunakan Uint8Array / implementasi internal browser
     define: {
         "global.Buffer": "Buffer",
     },
